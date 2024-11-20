@@ -35,3 +35,22 @@ const int mq9Threshold = 3000;
 float mq2RL = 10.0; // Load resistance in kOhms
 float mq4RL = 20.0;
 float mq9RL = 10.0;
+
+void setup() {
+  Serial.begin(115200);       // Debugging serial
+  Serial2.begin(9600, SERIAL_8N1, RXD2, TXD2); // UART2 for GSM communication
+
+  WiFi.begin(ssid, password);
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(1000);
+    Serial.println("Connecting to WiFi...");
+  }
+  Serial.println("Connected to WiFi");
+
+  // Pin Modes
+  pinMode(mq2LED, OUTPUT);
+  pinMode(mq4LED, OUTPUT);
+  pinMode(mq9LED, OUTPUT);
+  pinMode(buzzerPin, OUTPUT);
+  digitalWrite(buzzerPin, LOW);
+}
