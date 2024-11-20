@@ -163,3 +163,27 @@ void calculateMQ9(int rawValue, float* concentrations) {
   concentrations[0] = rs * 6;  // CO
   concentrations[1] = rs * 4;  // Methane
 }
+
+bool checkAndAlert(int value, int threshold, int ledPin, String sensorName) {
+  if (value > threshold) {
+    digitalWrite(ledPin, HIGH);
+    Serial.println(sensorName + " Alert: Threshold exceeded!");
+    return true;
+  } else {
+    digitalWrite(ledPin, LOW);
+    return false;
+  }
+}
+
+void sendSMS(String message) 
+{ 
+  Serial.println("INside SMS Sending Mode---");
+  Serial2.println("AT+CMGF=1"); // Set SMS to Text Mode
+  delay(100);
+  Serial2.println("AT+CMGS=\"+919310852499\""); // Replace with recipient's number
+  delay(100);
+  Serial2.print(message);
+  delay(100);
+  Serial2.write(26); // Send SMS (Ctrl+Z)
+  delay(1000);
+}
