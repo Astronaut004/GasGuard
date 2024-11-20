@@ -151,3 +151,15 @@ void calculateMQ2(int rawValue, float* concentrations) {
   concentrations[3] = rs * 15;  // Smoke
   concentrations[4] = rs * 5;   // Methane
 }
+
+void calculateMQ4(int rawValue, float* concentrations) {
+  float rs = mq4RL * (4095.0 / rawValue - 1.0);
+  concentrations[0] = rs * 10;  // Methane
+  concentrations[1] = rs * 7;   // CNG
+}
+
+void calculateMQ9(int rawValue, float* concentrations) {
+  float rs = mq9RL * (4095.0 / rawValue - 1.0);
+  concentrations[0] = rs * 6;  // CO
+  concentrations[1] = rs * 4;  // Methane
+}
