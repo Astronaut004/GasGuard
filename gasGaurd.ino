@@ -142,3 +142,12 @@ void loop() {
 
   delay(5000); // Adjust for ThingSpeak upload rate
 }
+
+void calculateMQ2(int rawValue, float* concentrations) {
+  float rs = mq2RL * (4095.0 / rawValue - 1.0);
+  concentrations[0] = rs * 10;  // LPG
+  concentrations[1] = rs * 8;   // Propane
+  concentrations[2] = rs * 12;  // Hydrogen
+  concentrations[3] = rs * 15;  // Smoke
+  concentrations[4] = rs * 5;   // Methane
+}
